@@ -44,18 +44,22 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
 
         @Override
         public void onCreate(@NonNull final LifecycleOwner owner) {
+            // This method is intentionally left empty because we do not need to handle the onCreate event.
         }
 
         @Override
-        public void onStart(@NonNull final LifecycleOwner owner) {
+        public void onStart(@NonNull final LifecycleOwner owner) {      // This method is intentionally left empty because we do not need to handle the onCreate event.
+      
         }
 
         @Override
-        public void onResume(@NonNull final LifecycleOwner owner) {
+        public void onResume(@NonNull final LifecycleOwner owner) {      // This method is intentionally left empty because we do not need to handle the onCreate event.
+      
         }
 
         @Override
-        public void onPause(@NonNull final LifecycleOwner owner) {
+        public void onPause(@NonNull final LifecycleOwner owner) {      // This method is intentionally left empty because we do not need to handle the onCreate event.
+      
         }
 
         @Override
@@ -254,16 +258,11 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
         });
         this.observer = new LifeCycleObserver(activity);
 
-        if (registrar != null) {
-            // V1 embedding setup for activity listeners.
-            application.registerActivityLifecycleCallbacks(this.observer);
-            registrar.addActivityResultListener(this.delegate);
-        } else {
-            // V2 embedding setup for activity listeners.
-            activityBinding.addActivityResultListener(this.delegate);
-            this.lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(activityBinding);
-            this.lifecycle.addObserver(this.observer);
-        }
+
+        // V2 embedding setup for activity listeners.
+        activityBinding.addActivityResultListener(this.delegate);
+        this.lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(activityBinding);
+        this.lifecycle.addObserver(this.observer);
     }
 
     private void tearDown() {
